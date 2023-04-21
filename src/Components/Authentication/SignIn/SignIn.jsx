@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import AuthImg from "../../../assets/auth_key.webp";
@@ -21,12 +21,13 @@ const SignIn = () => {
     let singInError;
 
     let navigate = useNavigate();
-    let location = useLocation();
-    let from = location.state?.from?.pathname || "/dashboard";
 
     useEffect(() => {
-        navigate(from, { replace: true });
-    }, [user, from, navigate]);
+        if (user) {
+
+            navigate('/dashboard');
+        }
+    }, [user, navigate,]);
 
     if (loading) {
         return <Loading></Loading>;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useCreateUserWithEmailAndPassword, useUpdateProfile } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthImg from "../../../assets/auth_key.webp";
 import auth from "../../../../Fiebase.init";
 import Loading from "../../Loading/Loading";
@@ -20,16 +20,14 @@ const SignUp = () => {
     const [updateProfile, updating, upError] = useUpdateProfile(auth);
 
     let navigate = useNavigate();
-    let location = useLocation();
-    let from = location.state?.from?.pathname || "/dashboard";
 
     let singInError;
     useEffect(() => {
         if (user) {
 
-            navigate(from, { replace: true });
+            navigate('/dashboard');
         }
-    }, [user, from, navigate,]);
+    }, [user, navigate,]);
 
 
 
@@ -166,7 +164,7 @@ const SignUp = () => {
 
                                         <p className="text-gray-500">
                                             Already have an Account?{" "}
-                                            <Link to="/signin" className=" text-light text-[#A25BF7]">
+                                            <Link to="/" className=" text-light text-[#A25BF7]">
                                                 SignIn Your Account
                                             </Link>
                                         </p>
